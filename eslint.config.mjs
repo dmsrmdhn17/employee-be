@@ -19,8 +19,6 @@ export default [
 			"@stylistic/js": stylisticJs,
 		},
 		rules: {
-			"prettier/prettier": ["error", { semi: true }], // Pastikan titik koma di akhir
-			"linebreak-style": ["error", "unix"], // Pastikan format baris menggunakan LF
 			"prettier/prettier": ["error"], // Apply Prettier formatting as ESLint errors
 			camelcase: "off", // Disable camelcase rule if you prefer
 			"no-useless-catch": "off",
