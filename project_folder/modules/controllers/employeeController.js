@@ -39,7 +39,7 @@ class Controller {
 				if (!req.body.responses) {
 					await Promise.all([
 						db.executeSelectQuery(`select e.* from public.employee e where e."deletedAt" is null ${where} ${sorting} limit ${limit} offset ${offset}`),
-						db.executeSelectQuery(`select count(e.id) from public.employee e where e."deletedAt" is null ${where} ${sorting}`),
+						db.executeSelectOneQuery(`select count(e.id) AS total from public.employee e where e."deletedAt" is null ${where}`),
 					])
 						.then(([data, count]) => {
 							req.body.responses = format_responses.berhasil_list(data, pages, count.total, limit);
