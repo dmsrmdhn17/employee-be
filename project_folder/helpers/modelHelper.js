@@ -3,15 +3,15 @@ const { DataTypes } = require("sequelize");
 exports.DEFAULT_FIELDS_MODEL = {
 	createdBy: {
 		type: DataTypes.INTEGER,
-		allowNull: false,
+		allowNull: true,
 	},
 	createdName: {
 		type: DataTypes.STRING,
-		allowNull: false,
+		allowNull: true,
 	},
 	createdCode: {
 		type: DataTypes.STRING,
-		allowNull: false,
+		allowNull: true,
 	},
 
 	updatedBy: {
