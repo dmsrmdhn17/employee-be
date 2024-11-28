@@ -317,12 +317,6 @@ class check {
 				}
 			});
 		} catch (err) {
-			// req.body.responses = {
-			//     data: null,
-			//     status: 200,
-			//     message: "Maaf, terjadi kesalahan internal server saat pengecekakan variable gagal, silahkan coba lagi atau hubungi administrator. ",
-			//     err
-			// };
 			req.body.responses = format_responseHelper.error_server(err);
 			if (next) {
 				next();

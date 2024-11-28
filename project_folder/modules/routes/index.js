@@ -1,5 +1,5 @@
 const router = require("express").Router();
 
-// router.use("/mcu", require("./mcu/routes"));
+router.use("/employee", require("./employee"));
 
 module.exports = router;
