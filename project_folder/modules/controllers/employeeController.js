@@ -7,6 +7,7 @@ const format_responses = require("../../helpers/format_responseHelper");
 // MODELS
 // const employeeModel = require("../models/employeeModel");
 // const employee_profileModel = require("../models/employee_profileModel");
+// const educationModel = require("../models/educationModel");
 
 class Controller {
 	static list_employee() {
