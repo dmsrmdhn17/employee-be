@@ -26,5 +26,22 @@ class Helper {
 			}
 		});
 	}
+
+	static async data_employee_profile({ employee_id }) {
+		return await new Promise(async (resolve, reject) => {
+			try {
+				let where = ``;
+				if (employee_id) {
+					where += `and ep.employee_id <> ${employee_id} `;
+				}
+
+				await db.executeSelectQuery(`select ep.* from public.employee_profile ep where ep."deletedAt" is null ${where}`).then(async (data) => {
+					resolve(data);
+				});
+			} catch (error) {
+				reject(format_responses.error_server(error));
+			}
+		});
+	}
 }
 module.exports = Helper;

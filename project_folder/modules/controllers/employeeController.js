@@ -245,7 +245,7 @@ class Controller {
 					await Promise.all([employeeHelper.data_employee({ id, nik, notEqualsId: true }), employeeHelper.data_employee({ id })])
 						.then(async ([data_nik, data_id]) => {
 							if (data_id.length < 1) {
-								req.body.responses = format_responses.error_204("Gagal, id tidak ditemukan!");
+								req.body.responses = format_responses.error_404("Gagal, employee tidak ditemukan!");
 							} else if (data_nik.length > 0) {
 								req.body.responses = format_responses.error_204("Gagal, nik sudah pernah terdaftar!");
 							} else {

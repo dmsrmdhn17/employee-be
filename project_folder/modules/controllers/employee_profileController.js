@@ -25,11 +25,12 @@ class Controller {
 				await check.multiple_check_stringvar(req, res, arr_validate_input, next);
 
 				if (!req.body.responses) {
-					await employeeHelper
-						.data_employee({ id: employee_id })
-						.then(async (data) => {
-							if (data.length < 1) {
-								req.body.responses = format_responses.error_204("Gagal, id tidak ditemukan!");
+					await Promise.all([employeeHelper.data_employee({ id: employee_id }), employeeHelper.data_employee_profile({ employee_id })])
+						.then(async ([data_employee, data_employee_profile]) => {
+							if (data_employee.length < 1) {
+								req.body.responses = format_responses.error_404("Gagal, employee tidak ditemukan!");
+							} else if (data_employee_profile.length < 1) {
+								req.body.responses = format_responses.error_404("Gagal, employee profile tidak ditemukan!");
 							} else {
 								await extendedModelHelper
 									.update({
@@ -44,8 +45,8 @@ class Controller {
 										},
 										whereData: { employee_id },
 									})
-									.then(async (result_employee) => {
-										req.body.responses = format_responses.berhasil_update(result_employee);
+									.then(async (result) => {
+										req.body.responses = format_responses.berhasil_update(result);
 									});
 							}
 						})
