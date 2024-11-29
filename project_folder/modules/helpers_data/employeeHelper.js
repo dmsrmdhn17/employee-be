@@ -15,7 +15,7 @@ class Helper {
 				}
 
 				if (nik) {
-					where += `and e.nik = ${nik} `;
+					where += `and e.nik = '${nik}' `;
 				}
 
 				await db.executeSelectQuery(`select e.* from public.employee e where e."deletedAt" is null ${where}`).then(async (data) => {
