@@ -3,7 +3,7 @@ const db = require("../../config/db/index").DB;
 const { DEFAULT_FIELDS_MODEL } = require("../../helpers/modelHelper");
 
 const model = db.define(
-	"education",
+	"employee_family",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -34,7 +34,7 @@ const model = db.define(
 			type: DataTypes.DATE,
 			allowNull: true,
 		},
-		religon: {
+		religion: {
 			type: DataTypes.ENUM("Islam", "Katolik", "Buda", "Protestan", "Konghucu", "Hindu"),
 			allowNull: false,
 		},
