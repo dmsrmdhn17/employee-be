@@ -10,7 +10,7 @@ const extendedModelHelper = require("../../helpers/extended_modelHelper");
 const employee_profileModel = require("../models/employee_profileModel");
 
 class Controller {
-	static update_employee_profile() {
+	static update_employee_family() {
 		return async (req, res, next) => {
 			try {
 				const { employee_id, place_of_birth, date_of_birth, gender, is_married, prof_pict } = req.body;
