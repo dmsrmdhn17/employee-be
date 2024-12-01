@@ -43,5 +43,22 @@ class Helper {
 			}
 		});
 	}
+
+	static async data_employee_family({ id }) {
+		return await new Promise(async (resolve, reject) => {
+			try {
+				let where = ``;
+				if (id) {
+					where += `and ef.id <> ${id} `;
+				}
+
+				await db.executeSelectQuery(`select ef.* from public.employee_family ef where ef."deletedAt" is null ${where}`).then(async (data) => {
+					resolve(data);
+				});
+			} catch (error) {
+				reject(format_responses.error_server(error));
+			}
+		});
+	}
 }
 module.exports = Helper;

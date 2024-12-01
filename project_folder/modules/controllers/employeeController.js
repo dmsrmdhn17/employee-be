@@ -83,6 +83,7 @@ class Controller {
 											json_agg(
 												json_build_object(
 													'edu_id', e2.id,
+													'edu_employee_id', e2.employee_id,
 													'edu_name', e2."name",
 													'edu_level', e2."level",
 													'edu_description', e2.description
@@ -97,6 +98,7 @@ class Controller {
 											json_agg(
 												json_build_object(
 													'fam_id', ef.id,
+													'fam_employee_id', ef.employee_id,
 													'fam_name', ef."name",
 													'fam_identifier', ef.identifier,
 													'fam_job', ef.job,

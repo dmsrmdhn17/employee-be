@@ -13,37 +13,45 @@ class Controller {
 	static update_employee_family() {
 		return async (req, res, next) => {
 			try {
-				const { employee_id, place_of_birth, date_of_birth, gender, is_married, prof_pict } = req.body;
+				const { id, employee_id, name, identifier, job, place_of_birth, date_of_birth, religion, is_life, is_divorced, relation_status } = req.body;
 
 				let arr_validate_input = [
+					{ method: "number", key: parseInt(id), variable_name: "Id" },
 					{ method: "number", key: parseInt(employee_id), variable_name: "Id pegawai" },
+					{ method: "string", key: name, variable_name: "Nama" },
+					{ method: "string", key: identifier, variable_name: "identifier" },
+					{ method: "string", key: job, variable_name: "Pekerjaan" },
 					{ method: "string", key: place_of_birth, variable_name: "Tempat lahir" },
 					{ method: "string", key: date_of_birth, variable_name: "Tanggal lahir" },
-					{ method: "string", key: gender, variable_name: "Jenis kelamin" },
+					{ method: "string", key: religion, variable_name: "Agama" },
 				];
 
 				await check.multiple_check_stringvar(req, res, arr_validate_input, next);
 
 				if (!req.body.responses) {
-					await Promise.all([employeeHelper.data_employee({ id: employee_id }), employeeHelper.data_employee_profile({ employee_id })])
+					await Promise.all([employeeHelper.data_employee({ id: employee_id }), employeeHelper.data_employee_family({ id })])
 						.then(async ([data_employee, data_employee_profile]) => {
 							if (data_employee.length < 1) {
 								req.body.responses = format_responses.error_404("Gagal, employee tidak ditemukan!");
 							} else if (data_employee_profile.length < 1) {
-								req.body.responses = format_responses.error_404("Gagal, employee profile tidak ditemukan!");
+								req.body.responses = format_responses.error_404("Gagal, employee family tidak ditemukan!");
 							} else {
 								await extendedModelHelper
 									.update({
 										req,
 										model: employee_profileModel,
 										data: {
+											name,
+											identifier,
+											job,
 											place_of_birth,
 											date_of_birth,
-											gender,
-											is_married,
-											prof_pict,
+											religion,
+											is_life,
+											is_divorced,
+											relation_status,
 										},
-										whereData: { employee_id },
+										whereData: { id },
 									})
 									.then(async (result) => {
 										req.body.responses = format_responses.berhasil_update(result);
